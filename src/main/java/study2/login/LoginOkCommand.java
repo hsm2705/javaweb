@@ -1,4 +1,4 @@
-package study.database;
+package study2.login;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -6,26 +6,21 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@SuppressWarnings("serial")
-@WebServlet("/database/LoginOk")
-public class LoginOk extends HttpServlet {
+public class LoginOkCommand implements LoginInterface {
+
 	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String mid = request.getParameter("mid")==null ? "" : request.getParameter("mid");
 		String pwd = request.getParameter("pwd")==null ? "" : request.getParameter("pwd");
 		
 		LoginDAO dao = new LoginDAO();
 		
 		LoginVO vo = dao.getLoginCheck(mid, pwd);
-		
-		PrintWriter out = response.getWriter();
 		
 		if(vo.getName() != null) {
 			// 회원 인증 성공시 처리...
@@ -75,7 +70,6 @@ public class LoginOk extends HttpServlet {
 			// 2.쿠키에 아이디를 저장/해제 처리한다.
 			// 로그인시 아이디저장시킨다고 체크하면 쿠키에 아이디 저장하고, 그렇지 않으면 쿠키에서 아이디를 제거한다.
 			String idSave = request.getParameter("idSave")==null ? "off" : "on";
-			System.out.println("idSave : " + idSave);
 			Cookie cookieMid = new Cookie("cMid", mid);
 			cookieMid.setPath("/");
 			if(idSave.equals("on")) {
@@ -88,17 +82,14 @@ public class LoginOk extends HttpServlet {
 			
 			
 			// 정상 로그인Ok이후에 모든 처리가 끝나면 memberMain.jsp로 보내준다.
-			out.print("<script>");
-			out.print("alert('"+mid+"님 로그인 되었습니다.');");
-			out.print("location.href='"+request.getContextPath()+"/study/0428_database/memberMain.jsp';");
-			out.print("</script>");
+			request.setAttribute("msg", mid + "님 로그인 되었습니다.");
+			request.setAttribute("url", request.getContextPath()+"/MemberMain.re");
 		}
 		else {
 			// 회원 인증 실패시 처리... 다시 로그인창으로 보내준다.
-			out.print("<script>");
-			out.print("alert('로그인 실패~~');");
-			out.print("location.href='"+request.getContextPath()+"/study/0428_database/login.jsp';");
-			out.print("</script>");
+			request.setAttribute("msg", "로그인 실패~~~");
+			request.setAttribute("url", request.getContextPath()+"/Login.re");
 		}
 	}
+
 }
