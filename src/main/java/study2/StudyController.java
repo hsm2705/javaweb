@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import study2.password.PassOk1Commond;
+import study2.password.PassOk2Commond;
+
 @SuppressWarnings("serial")
 @WebServlet("*.st")
 public class StudyController extends HttpServlet {
