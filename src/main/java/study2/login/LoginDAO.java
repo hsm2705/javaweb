@@ -232,5 +232,10 @@ public class LoginDAO {
 		}
 		return res;
 	}
+
+	public long getHashTableSearch(int randomKey) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 }
