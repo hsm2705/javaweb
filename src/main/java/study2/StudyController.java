@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import study2.password.PassOk1Commond;
 import study2.password.PassOk2Commond;
+import study2.uuid.UuidCommond;
 
 @SuppressWarnings("serial")
 @WebServlet("*.st")
@@ -43,6 +44,24 @@ public class StudyController extends HttpServlet {
 			command = new UuidCommond();
 			command.execute(request, response);
 			viewPage += "/uuid/uuidOk.jsp";
+		}
+		else if(com.equals("/AjaxTest1")){
+			viewPage += "/ajax/ajaxTest1.jsp";
+		}
+		else if(com.equals("/UserList")){
+			command = new UserListCommond();
+			command.execute(request, response);
+			viewPage += "/ajax2/userList.jsp";
+		}
+		else if(com.equals("/UserInput")){
+			command = new UserInputCommond();
+			command.execute(request, response);
+			return;
+		}
+		else if(com.equals("/UserDelete")){
+			command = new UserDeleteCommond();
+			command.execute(request, response);
+			return;
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);

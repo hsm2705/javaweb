@@ -34,6 +34,8 @@
 				      <a class="dropdown-item" href="${pageContext.request.contextPath}/study/0428_database/Login.re">로그인연습2</a>
 				      <a class="dropdown-item" href="${pageContext.request.contextPath}/Password.st">암호화연습</a>
 				      <a class="dropdown-item" href="${pageContext.request.contextPath}/UuidForm.st">UUID연습</a>
+				      <a class="dropdown-item" href="${pageContext.request.contextPath}/AjaxTest1">aJax연습1</a>
+				      <a class="dropdown-item" href="${pageContext.request.contextPath}/UserList.st">aJax연습2</a>
 				    </div>
 				  </div>  
 	      </li>   
@@ -49,7 +51,7 @@
 	      </li>   
 	      <li>
 				  <div class="dropdown">
-				    <button type="button" class="btn text-light dropdown-toggle" data-toggle="dropdown">Information</button>
+				    <button type="button" class="btn text-light dropdown-toggle" data-toggle="dropdown">MyPage</button>
 				    <div class="dropdown-menu">
 				      <a class="dropdown-item" href="${ctp}/MemberMain.mem">회원메인방</a>
 				      <a class="dropdown-item" href="#">회원정보수정</a>
