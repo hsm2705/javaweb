@@ -17,6 +17,7 @@
   <script>
     'use strict';
     
+    // user 등록하기
     function userInput() {
     	let mid = $("#mid").val().trim();
     	let name = $("#name").val().trim();
@@ -110,6 +111,61 @@
     		},
     		error : function() {
     			alert("전송실패~~");
+    		}
+    	});
+    }
+    
+    // 자료 수정하기
+    function userUpdate() {
+    	let mid = $("#mid").val().trim();
+    	let name = $("#name").val().trim();
+    	let age = $("#age").val().trim();
+    	let address = $("#address").val().trim();
+    	
+    	if(mid == "") {
+    		alert("아이디를 입력하세요");
+    		$("#mid").focus();
+    		return false;
+    	}
+    	else if(name == "") {
+    		alert("성명을 입력하세요");
+    		$("#name").focus();
+    		return false;
+    	}
+    	else if(age == "") {
+    		alert("나이를 입력하세요");
+    		$("#age").focus();
+    		return false;
+    	}
+    	else if(address == "") {
+    		alert("주소를 입력하세요");
+    		$("#address").focus();
+    		return false;
+    	}
+    	
+    	let query = {
+    			mid     : mid,
+    			name    : name,
+    			age     : age,
+    			address : address
+    	}
+    	
+    	$.ajax({
+    		type  : "post",
+    		url   : "${ctp}/UserUpdate.st",
+    		data  : query,
+    		success:function(res) {
+    			if(res == "1") {
+    				alert("수정처리 되었습니다.");
+    				location.reload();
+    			}
+    			else {
+    				alert(res);
+    				$("#mid").focus();
+    			}
+    		},
+    		error : function() {
+    			alert("전송오류!");
     		}
     	});
     }
