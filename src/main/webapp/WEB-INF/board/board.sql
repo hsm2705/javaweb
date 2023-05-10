@@ -22,13 +22,31 @@ insert into board values (default,'admin','관리맨','게시판 서비스를 �
 
 select * from board;
 
-/* 날짜함수 처리 연습 */ 
-select now(); /* 오늘 날짜 보여주기 */
-select year(now()); 
+/* 게시판에 댓글 달기 */
+create table boardReply (
+  idx   int not null auto_increment,		/* 댓글의 고유번호 */
+  boardIdx int not null,								/* 원본글의 고유번호(외래키로 지정) */
+  mid		varchar(20) not null,						/* 댓글올린이의 아이디 */
+  nickName varchar(20) not null,				/* 댓글올린이의 닉네임 */
+  wDate		datetime default now(),				/* 댓글 올린 날짜 */
+  hostIp  varchar(50)  not null,				/* 댓글 올린 PC의 고유 IP */
+  content text not null,								/* 댓글 내용 */
+  primary key(idx),											/* 기본키 : 고유번호 */
+  foreign key(boardIdx) references board(idx)		/* 외래키 설정 */
+  on update cascade
+  on delete restrict
+);
+
+desc boardReply;
+
+
+/* 날짜함수 처리 연습 */
+select now();				/* 오늘 날짜 보여달라. */
+select year(now());
 select month(now());
 select day(now());
-select concat(year(now()), '년 ' , month(now()), '월 ', day(now()), '일');
-select concat(year(now()), '년 ' , month(now()), '월 ', day(now()), '일') as nalja;
+select concat(year(now()),'년 ',month(now()), '월 ', day(now()), '일');
+select concat(year(now()),'년 ',month(now()), '월 ', day(now()), '일') as nalja;
 select date(now());				/* 날짜를 '년-월-일' 로 출력 */
 select weekday(now()); 		/* 0(월), 1(화), 2(수), 3(목), 4(금), 5(토), 6(일) */
 select dayofweek(now());	/* 1(일), 2(월), 3(화), 4(수), 5(목), 6(금), 7(토) */
@@ -42,7 +60,7 @@ select idx,year(wDate) from board;
 select date_add(now(), interval 1 day);		/* 오늘 날짜보다 +1 = 내일날짜 출력 */
 select date_add(now(), interval -1 day);		/* 오늘 날짜보다 -1 = 어제날짜 출력 */
 select now(),date_add(now(), interval 10 day_hour);		/* 오늘날짜보다 +10시간 이후의 날짜/시간 출력 */
-select now(),date_add(now(), interval -10 day_hour);		/* 오늘날짜보다 +10시간 이후의 날짜/시간 출력 */
+select now(),date_add(now(), interval -10 day_hour);		/* 오늘날짜보다 -10시간 이후의 날짜/시간 출력 */
 
 /* date_sub(date, interval 값 Type) */
 select date_sub(now(), interval 1 day);		/* 오늘 날짜보다 -1 = 어제날짜 출력 */
@@ -75,4 +93,8 @@ select wDate, date_format(wDate, '%Y-%m-%d %H:%i') from board;
 select *,date_format(wDate, '%Y-%m-%d'),date_format(wDate, '%H:%i'),timestampdiff(hour, wDate, now()) as hour_diff from board;
 select *,date_format(wDate, '%Y-%m-%d') as day_format, date_format(wDate, '%H:%i') as hour_format, timestampdiff(hour, wDate, now()) as hour_diff from board;
 
-
+/* 이전글/ 다음글 꺼내오기 */
+select * from board;
+select * from board where idx = 6;
+select idx,title from board where idx < 6 order by idx desc limit 1; /* 이전글 */
+select idx,title from board where idx > 6 limit 1;	/* 다음글 */
