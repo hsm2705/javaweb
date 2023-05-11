@@ -98,3 +98,47 @@ select * from board;
 select * from board where idx = 6;
 select idx,title from board where idx < 6 order by idx desc limit 1; /* 이전글 */
 select idx,title from board where idx > 6 limit 1;	/* 다음글 */
+
+/* 게시판(board) 리스트 글제목옆에 해당글의 댓글(boardReply)수를 출력하시오 */
+
+/* 댓글의 수를 전체 List에 출력하기위한 연습 */
+-- 전체 board테이블의 내용을 최신순으로 출력?
+select * from board order by idx desc;
+
+-- board테이블 고유번호 22번에 해당하는 댓글테이블의 댓글수는?
+select count(*) from boardReply where boardIdx = 22;
+
+-- 앞의 예에서 원본글의 고유번호와함께, 총 댓글의 갯수는 replyCnt 로 출력?
+select boardIdx, count(*) as replyCnt from boardReply where boardIdx = 22;
+
+-- 이때, 원본글을 쓴 닉네임도 함께 출력하시오. 단, 닉네임은 원본글(board)테이블에서 가져와 출력하시오?
+select boardIdx, count(*) as replyCnt,
+  (select nickName from board where idx = 22) as nickName
+  from boardReply 
+  where boardIdx = 22;
+
+-- 앞의 내용들을 부모관점(board테이블)에서 보자....
+select mid, nickName from board where idx = 22;
+
+-- 이때 앞의 닉네임을 자식(댓글)테이블(boardReply)에서 가져와서 보여준다면??
+select mid, 
+  (select nickName from boardReply where boardIdx=22) as nickName
+  from board where idx = 22;
+  
+select mid, 
+  (select count(*) from boardReply where boardIdx=22) as nickName
+  from board where idx = 22;
+  
+select *, 
+  (select count(*) from boardReply where boardIdx=22) as replyCnt
+  from board where idx = 22;
+  
+-- 부모관점(board)테이블을 기준으로 처리....
+-- board테이블의 1페이지 5건을 출력하되, board테이블의 모든내용과, 현재 출력된 게시글에 달려있는 댓글의 개수를 출력?
+-- 단, 최신글을 먼처 출력시켜주세요.
+select *,
+  (select count(*) from boardReply where boardIdx=b.idx) as replyCnt
+  from board b
+  order by idx desc
+  limit 5;
+  
