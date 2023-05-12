@@ -24,7 +24,7 @@ public class MemberLoginOkCommand implements MemberInterface {
 		
 		MemberVO vo = dao.getMemberMidCheck(mid);
 		
-		if(vo.getSalt() == null) {
+		if(vo.getSalt() == null || vo.getUserDel().equals("OK")) {
 			request.setAttribute("msg", "회원정보가 없습니다. \\n다시 입력하세요.");
 			request.setAttribute("url", request.getContextPath()+"/MemberLogin.mem");
 			return;
@@ -48,6 +48,7 @@ public class MemberLoginOkCommand implements MemberInterface {
 		session.setAttribute("sMid", mid);
 		session.setAttribute("sNickName", vo.getNickName());
 		session.setAttribute("sLevel", vo.getLevel());
+		session.setAttribute("sLastDate", vo.getLastDate());
 		
 		// 2~3.
 		Date now = new Date();

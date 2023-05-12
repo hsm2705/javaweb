@@ -14,9 +14,9 @@ public class AdminLogoutCommand implements GuestInterface {
 		HttpSession session = request.getSession();
 		
 		session.removeAttribute("sAdmin");
-		request.setAttribute("msg", "관리자 로그아웃처리되었습니다");
-		request.setAttribute("url", request.getContextPath()+"/GuestList.gu");
 		
+		request.setAttribute("msg", "관리자 로그아웃처리 되었습니다.");
+		request.setAttribute("url", request.getContextPath()+"/GuestList.gu");
 	}
 
 }

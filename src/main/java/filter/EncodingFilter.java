@@ -16,7 +16,7 @@ public class EncodingFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		
-//		System.out.println("1.이곳은 Filter통과하기 전입니다.");
+		// System.out.println("1.이곳은 Filter통과하기 전입니다.");
 		
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
@@ -24,8 +24,7 @@ public class EncodingFilter implements Filter {
 		chain.doFilter(request, response);
 		
 		
-//		System.out.println("2.이곳은 Filter통과한 후입니다.");
-		
+		// System.out.println("2.이곳은 Filter통과한 후입니다.");
 		
 	}
 

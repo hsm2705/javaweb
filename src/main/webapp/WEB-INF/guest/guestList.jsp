@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>guestList(블록페이징처리-한페이지분량조정하기-부트스트랩페이지네이션 적용).jsp</title>
+  <title>guestList(블록페이징처리-한페이지분량조정하기-부트스트랩페이지네이션적용).jsp</title>
   <jsp:include page="/include/bs4.jsp" />
   <style>
     th {
@@ -73,10 +73,10 @@
 	  <table class="table table-borderless mb-0 mt-0">
 	    <tr>
 	      <td>
-	      번호 : ${curScrStartNo}
-	      	<c:if test="${sAdmin == 'adminOk'}">
-	      		<a href="javascript:delCheck(${vo.idx})" class="btn btn-danger btn-sm">삭제</a>
-			</c:if>	      
+	        번호 : ${curScrStartNo}
+	        <c:if test="${sAdmin == 'adminOk'}">
+	        	<a href="javascript:delCheck(${vo.idx})" class="btn btn-danger btn-sm">삭제</a>
+	        </c:if>
 	      </td>
 	      <td style="text-align:right;">방문IP : ${vo.hostIp}</td>
 	    </tr>
@@ -107,6 +107,7 @@
 	      <td colspan="3" style="height:150px">${fn:replace(vo.content, newLine, '<br/>')}</td>
 	    </tr>
 	  </table>
+	  <br/>
 	  <c:set var="curScrStartNo" value="${curScrStartNo - 1}"/>
   </c:forEach>
   <br/>			<!-- 4페이지(1블록)에서 0블록으로 가게되면 현재페이지는 1페이지가 블록의 시작페이지가 된다. -->

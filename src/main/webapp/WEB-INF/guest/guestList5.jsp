@@ -73,10 +73,10 @@
 	  <table class="table table-borderless mb-0 mt-0">
 	    <tr>
 	      <td>
-	      번호 : ${curScrStartNo}
-	      	<c:if test="${sAdmin == 'adminOk'}">
-	      		<a href="javascript:delCheck(${vo.idx})" class="btn btn-danger btn-sm">삭제</a>
-			</c:if>	      
+	        번호 : ${curScrStartNo}
+	        <c:if test="${sAdmin == 'adminOk'}">
+	        	<a href="javascript:delCheck(${vo.idx})" class="btn btn-danger btn-sm">삭제</a>
+	        </c:if>
 	      </td>
 	      <td style="text-align:right;">방문IP : ${vo.hostIp}</td>
 	    </tr>
