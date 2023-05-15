@@ -5,6 +5,15 @@
   pageContext.setAttribute("level", level);
 %>
 <c:set var="ctp" value="${pageContext.request.contextPath}"/>
+<script>
+  function deleteAsk() {
+	  let ans = confirm("정말로 탈퇴 하시겠습니까?");
+	  if(ans) {
+		  let ans2 = confirm("탈퇴후 같은 아이디로 1개월간 재가입하실수 없습니다.\n그래도 탈퇴 하시겠습니까?");
+		  if(ans2) location.href="${ctp}/MemberDeleteAsk.mem";
+	  }
+  }
+</script>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <!-- <a class="navbar-brand" href="http://localhost:9090/javaweb/">Home</a> -->
   <a class="navbar-brand" href="http://192.168.50.98:9090/javaweb/">Home</a>
@@ -43,9 +52,10 @@
 				  <div class="dropdown">
 				    <button type="button" class="btn text-light dropdown-toggle" data-toggle="dropdown">Study2</button>
 				    <div class="dropdown-menu">
-				      <a class="dropdown-item" href="#">URL매핑(디렉토리패턴)</a>
-				      <a class="dropdown-item" href="#">로그인연습3</a>
-				      <a class="dropdown-item" href="#">Link 3</a>
+				      <a class="dropdown-item" href="${ctp}/FileUpLoad1.st">싱글파일업로드연습1</a>
+				      <a class="dropdown-item" href="${ctp}/FileUpLoad2.st">멀티파일업로드연습2</a>
+				      <a class="dropdown-item" href="${ctp}/FileUpLoad3.st">멀티파일업로드연습3</a>
+				      <a class="dropdown-item" href="${ctp}/FileUpLoad4.st">멀티파일업로드연습4</a>
 				    </div>
 				  </div>  
 	      </li>   
@@ -57,7 +67,7 @@
 				      <a class="dropdown-item" href="${ctp}/MemberPwdUpdate.mem">회원비밀번호변경</a>
 				      <a class="dropdown-item" href="${ctp}/MemberPwdCheckForm.mem">회원정보수정</a>
 				      <c:if test="${sLevel != 1}"><a class="dropdown-item" href="${ctp}/MemberList.mem">회원리스트</a></c:if>
-				      <a class="dropdown-item" href="${ctp}/MemberDeleteAsk.mem">회원탈퇴</a>
+				      <a class="dropdown-item" href="javascript:deleteAsk()">회원탈퇴</a>
 				      <c:if test="${sLevel == 0}"><a class="dropdown-item" href="${ctp}/AdminMain.ad">관리자메뉴</a></c:if>
 				    </div>
 				  </div>  

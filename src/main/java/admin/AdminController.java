@@ -50,10 +50,25 @@ public class AdminController extends HttpServlet {
 			command.execute(request, response);
 			return;
 		}
+		else if(com.equals("/AdminMemberLevelTotalChange")) {
+			command = new AdminMemberLevelTotalChangeCommand();
+			command.execute(request, response);
+			return;
+		}
 		else if(com.equals("/AdminMemberInfor")) {
 			command = new AdminMemberInforCommand();
 			command.execute(request, response);
 			viewPage += "/member/adminMemberInfor.jsp";
+		}
+		else if(com.equals("/AdminMemberDelete")) {
+			command = new AdminMemberDeleteCommand();
+			command.execute(request, response);
+			return;
+		}
+		else if(com.equals("/AdminMemberLevelShow")) {
+			command = new AdminMemberLevelShowCommand();
+			command.execute(request, response);
+			viewPage += "/member/adminMemberList.jsp";
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
