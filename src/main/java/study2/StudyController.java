@@ -15,9 +15,14 @@ import study2.ajax2.UserInputCommond;
 import study2.ajax2.UserListCommond;
 import study2.ajax2.UserSearchCommond;
 import study2.ajax2.UserUpdateCommond;
+import study2.calendar.Calendar2Commond;
+import study2.calendar.CalendarCommond;
+import study2.modal.ModalTest2Commond;
 import study2.password.PassOk1Commond;
 import study2.password.PassOk2Commond;
 import study2.pdstest.DownLoadCommond;
+import study2.pdstest.FileDeleteCommond;
+import study2.pdstest.FileDownLoadCommond;
 import study2.pdstest.FileUpLoad1OkCommond;
 import study2.pdstest.FileUpLoad2OkCommond;
 import study2.pdstest.FileUpLoad3OkCommond;
@@ -137,6 +142,24 @@ public class StudyController extends HttpServlet {
 			command = new FileDeleteCommond();
 			command.execute(request, response);
 			return;
+		}
+		else if(com.equals("/ModalTest1")){
+			viewPage += "/modal/modalTest1.jsp";
+		}
+		else if(com.equals("/ModalTest2")){
+			command = new ModalTest2Commond();
+			command.execute(request, response);
+			viewPage += "/modal/modalTest2.jsp";
+		}
+		else if(com.equals("/Calendar")){
+			command = new CalendarCommond();
+			command.execute(request, response);
+			viewPage += "/calendar/calendar.jsp";
+		}
+		else if(com.equals("/Calendar2")){
+			command = new Calendar2Commond();
+			command.execute(request, response);
+			viewPage += "/calendar/calendar2.jsp";
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
