@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import study2.ajax.Ajax6Commond;
 import study2.ajax2.UserDeleteCommond;
 import study2.ajax2.UserInputCommond;
 import study2.ajax2.UserListCommond;
@@ -74,6 +75,11 @@ public class StudyController extends HttpServlet {
 		}
 		else if(com.equals("/AjaxTest1")){
 			viewPage += "/ajax/ajaxTest1.jsp";
+		}
+		else if(com.equals("/Ajax6")){
+			command = new Ajax6Commond();
+			command.execute(request, response);
+			return;
 		}
 		else if(com.equals("/UserList")){
 			command = new UserListCommond();
@@ -190,6 +196,12 @@ public class StudyController extends HttpServlet {
 			command = new PoliceCrimeDataSearchCommond();
 			command.execute(request, response);
 			viewPage += "/api/crime/crimeApi.jsp";
+		}
+		else if(com.equals("/PhotoView1")){
+			viewPage += "/photo/photoView1.jsp";
+		}
+		else if(com.equals("/PhotoView2")){
+			viewPage += "/photo/photoView2.jsp";
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
